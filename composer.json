@@ -17,7 +17,7 @@
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
         "noonenew/tmv-whapi": "dev-master",
-        "mgp25/whatsapi": "dev-master"
+        "mgp25/whatsapi": "2.5.*"
     },
     "autoload": {
         "psr-4": {
