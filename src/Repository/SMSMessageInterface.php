@@ -1,4 +1,4 @@
-<?php namespace Williamson\Larawhatsapi\Repository;
+<?php namespace Noonenew\Larawhapi\Repository;
 
 interface SMSMessageInterface {
 
