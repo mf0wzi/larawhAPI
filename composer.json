@@ -16,12 +16,12 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
-        "noonenew/tmv-whatsapi": "0.*",
+        "noonenew/tmv-whapi": "0.*",
         "mgp25/whatsapi": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "Williamson\\Larawhatsapi\\": "src/"
+            "Williamson\\Larawhapi\\": "src/"
         }
     },
     "minimum-stability": "dev",
