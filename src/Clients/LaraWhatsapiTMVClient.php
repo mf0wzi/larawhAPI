@@ -1,9 +1,9 @@
-<?php namespace Williamson\Larawhatsapi\Clients;
+<?php namespace Noonenew\Larawhapi\Clients;
 
 use Tmv\WhatsApi\Client;
 use Tmv\WhatsApi\Message\Action\ChatState;
 use Tmv\WhatsApi\Message\Action\MessageText;
-use Williamson\Larawhatsapi\Repository\SMSMessageInterface;
+use Noonenew\Larawhapi\Repository\SMSMessageInterface;
 
 class LaraWhatsapiTMVClient implements SMSMessageInterface {
 
