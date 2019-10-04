@@ -1,4 +1,4 @@
-<?php namespace Williamson\Larawhatsapi;
+<?php namespace Noonenew\Larawhapi;
 
 use App;
 use Config;
@@ -16,7 +16,7 @@ use Tmv\WhatsApi\Event\MessageReceivedEvent;
 use Tmv\WhatsApi\Message\Received;
 use WhatsProt;
 
-class LaraWhatsapiServiceProvider extends ServiceProvider {
+class LaraWhapiServiceProvider extends ServiceProvider {
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -28,13 +28,13 @@ class LaraWhatsapiServiceProvider extends ServiceProvider {
 
     public function boot()
     {
-        $this->package('williamson/larawhatsapi', null, __DIR__);
+        $this->package('noonenew/larawhapi', null, __DIR__);
 
         $loader  = AliasLoader::getInstance();
         $aliases = Config::get('app.aliases');
         if (empty($aliases['WA']))
         {
-            $loader->alias('WA', 'Williamson\Larawhatsapi\Facades\LaraWhatsapiFacade');
+            $loader->alias('WA', 'noonenew\Larawhapi\Facades\LaraWhapiFacade');
         }
     }
 
@@ -49,11 +49,11 @@ class LaraWhatsapiServiceProvider extends ServiceProvider {
         $this->app->bindShared('Tmv\WhatsApi\Entity\Identity', function ()
         {
             //Setup Account details.
-            $account   = Config::get("larawhatsapi::useAccount");
-            $nickName  = Config::get("larawhatsapi::accounts.$account.nickName");
-            $number    = Config::get("larawhatsapi::accounts.$account.number");
-            $password  = Config::get("larawhatsapi::accounts.$account.password");
-            $userIdent = Config::get("larawhatsapi::accounts.$account.identity");
+            $account   = Config::get("larawhapi::useAccount");
+            $nickName  = Config::get("larawhapi::accounts.$account.nickName");
+            $number    = Config::get("larawhapi::accounts.$account.number");
+            $password  = Config::get("larawhapi::accounts.$account.password");
+            $userIdent = Config::get("larawhapi::accounts.$account.identity");
 
             // Initializing client
             // Creating a service to retrieve phone info
@@ -77,10 +77,10 @@ class LaraWhatsapiServiceProvider extends ServiceProvider {
         //Set up how the create TMV's Client Object when one is asked to be created (which needs the Identity)
         $this->app->bindShared('Tmv\WhatsApi\Client', function ()
         {
-            $debug             = Config::get("larawhatsapi::debug");
-            $account           = Config::get("larawhatsapi::useAccount");
-            $number            = Config::get("larawhatsapi::accounts.$account.number");
-            $nextChallengeFile = Config::get("larawhatsapi::nextChallengeDir") . "/" . $number . "-NextChallenge.dat";
+            $debug             = Config::get("larawhapi::debug");
+            $account           = Config::get("larawhapi::useAccount");
+            $number            = Config::get("larawhapi::accounts.$account.number");
+            $nextChallengeFile = Config::get("larawhapi::nextChallengeDir") . "/" . $number . "-NextChallenge.dat";
 
             $identity = App::make('Tmv\WhatsApi\Entity\Identity');
             // Initializing client
@@ -154,16 +154,16 @@ class LaraWhatsapiServiceProvider extends ServiceProvider {
 
 
         //Which concret implementation will we use when an SMSInterface is asked for? User can pick in the config file.
-        $this->app->bindShared('Williamson\Larawhatsapi\Repository\SMSMessageInterface', function ()
+        $this->app->bindShared('noonenew\Larawhapi\Repository\SMSMessageInterface', function ()
         {
-            $fork = strtoupper(Config::get('larawhatsapi::fork'));
+            $fork = strtoupper(Config::get('larawhapi::fork'));
             switch ($fork)
             {
                 case ($fork == 'MGP25'):
-                    return App::make('Williamson\Larawhatsapi\Clients\LaraWhatsapiMGP25Client');
+                    return App::make('noonenew\Larawhapi\Clients\LaraWhatsapiMGP25Client');
                     break;
                 default:
-                    return App::make('Williamson\Larawhatsapi\Clients\LaraWhatsapiTMVClient');
+                    return App::make('noonenew\Larawhapi\Clients\LaraWhatsapiTMVClient');
                     break;
             }
         });
@@ -173,13 +173,13 @@ class LaraWhatsapiServiceProvider extends ServiceProvider {
         $this->app->bindShared('WhatsProt', function ()
         {
             //Setup Account details.
-            $debug     = Config::get("larawhatsapi::debug");
-            $account   = Config::get("larawhatsapi::useAccount");
-            $nickName  = Config::get("larawhatsapi::accounts.$account.nickName");
-            $number    = Config::get("larawhatsapi::accounts.$account.number");
-            $userIdent = Config::get("larawhatsapi::accounts.$account.identity");
-            $nextChallengeFile = Config::get("larawhatsapi::nextChallengeDir") . "/" . $number . "-NextChallenge.dat";
-            $identityFileNoDat = Config::get("larawhatsapi::nextChallengeDir") . "/" . $number . "-Identity";
+            $debug     = Config::get("larawhapi::debug");
+            $account   = Config::get("larawhapi::useAccount");
+            $nickName  = Config::get("larawhapi::accounts.$account.nickName");
+            $number    = Config::get("larawhapi::accounts.$account.number");
+            $userIdent = Config::get("larawhapi::accounts.$account.identity");
+            $nextChallengeFile = Config::get("larawhapi::nextChallengeDir") . "/" . $number . "-NextChallenge.dat";
+            $identityFileNoDat = Config::get("larawhapi::nextChallengeDir") . "/" . $number . "-Identity";
             $identityFileDat = $identityFileNoDat.'.dat';
             if( ! File::exists($identityFileDat) || File::get($identityFileDat) !== $userIdent){
                 File::put($identityFileDat, $userIdent);
