@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Williamson\\Larawhapi\\": "src/"
+            "Noonenew\\Larawhapi\\": "src/"
         }
     },
     "minimum-stability": "dev",
