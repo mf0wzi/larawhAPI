@@ -1,0 +1,29 @@
+{
+    "name": "williamson/larawhatsapi",
+    "description": "A laravel Wrapper for WhatsApi",
+    "license": "MIT",
+    "keywords": [
+        "whatsapp",
+        "whatsapi",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "MM",
+            "email": "mplanmaster@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+        "noonenew/tmv-whatsapi": "0.*",
+        "mgp25/whatsapi": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Williamson\\Larawhatsapi\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
