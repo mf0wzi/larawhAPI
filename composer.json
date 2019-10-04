@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "4.2.*",
+        "illuminate/support": "6.*",
         "noonenew/tmv-whapi": "dev-master",
         "mgp25/whatsapi": "3.2.*"
     },
